@@ -17,7 +17,8 @@ app=Flask(__name__)
 
 @app.route('/')
 def root():
-    return "test"
+    return render_template ("search_page.html")
+
 
 def get_search_tuple(search_word,file_location):
     df=pd.read_csv(file_location)
@@ -59,6 +60,17 @@ def get_similar_all_syns(word,file_location):
 
 @app.route('/search/<word>')
 def search_word(word):
+    file_location="data/English-Ahmed-Ali-100.csv"
+    big_dict=get_similar_all_syns(word,file_location)
+    print(big_dict)
+    for word in big_dict:
+        print(word)
+    #return("number of synonyms = "+str(len(big_dict.keys())))
+    return render_template("result.html",data=big_dict)
+
+@app.route('/searchform',methods=['POST'])
+def search_form():
+    word=request.form["Word"]
     file_location="data/English-Ahmed-Ali-100.csv"
     big_dict=get_similar_all_syns(word,file_location)
     print(big_dict)
