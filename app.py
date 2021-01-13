@@ -24,8 +24,9 @@ def get_search_tuple(search_word,file_location):
     aya=[]
     count_matches=0
     for index,row in df.iterrows():
-        sim = fuzz.token_set_ratio(search_word,row["AyahText"])
-        if sim >=95:
+        if search_word in row["AyahText"]:
+        # sim = fuzz.token_set_ratio(search_word,row["AyahText"])
+        # if sim >=95:
             trans_string=row["AyahText"]
             trans_string=trans_string.replace("&quot;","'")
             touble=(row["SuraID"],row["VerseID"],trans_string)
