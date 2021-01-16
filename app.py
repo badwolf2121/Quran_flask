@@ -25,7 +25,8 @@ def get_search_tuple(search_word,file_location):
     aya=[]
     count_matches=0
     for index,row in df.iterrows():
-        if search_word in row["AyahText"]:
+        if search_word.upper() in row["AyahText"].upper(): 
+ 
         # sim = fuzz.token_set_ratio(search_word,row["AyahText"])
         # if sim >=95:
             trans_string=row["AyahText"]
@@ -73,11 +74,12 @@ def search_form():
     word=request.form["Word"]
     file_location="data/English-Ahmed-Ali-100.csv"
     big_dict=get_similar_all_syns(word,file_location)
+    big_dict["search_word"]=word
     print(big_dict)
     for word in big_dict:
         print(word)
     #return("number of synonyms = "+str(len(big_dict.keys())))
-    return render_template("result.html",data=big_dict)
+    return render_template("search_page.html",data=big_dict,)
 
 
 

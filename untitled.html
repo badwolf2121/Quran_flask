@@ -1,0 +1,10 @@
+<table>
+
+			<th>Chapter number</th><th>verse number</th><th>text</th>
+			{%for tup in data.word%}
+			<tr>
+				<td>{{tup[0]}}</td><td>{{tup[1]}}</td><td>{{tup[2]}}</td>
+			</tr>
+			{%endfor%}
+
+	</table>

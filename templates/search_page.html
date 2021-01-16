@@ -21,7 +21,11 @@
 
 			<form action="/searchform" method="post">
 				<label>Enter the word you want to search</label>
+		  		{%if data%}
+		  		<input type="text" name="Word" value='{{data.search_word}}'></input>
+		  		{%else%}
 		  		<input type="text" name="Word"></input>
+		  		{% endif %}
 		  		<input type="submit" value="Search"></input>
 	</form>
 	
@@ -29,10 +33,31 @@
 
 	</div>
 
-	
+
+	{%if data%}
+		
+		<div class="container">
+
+		{% for key, value in data.items() %}		
+			{%if key!="search_word"%}
+
+				<p>{{key}}</p>
+				<table class="table table-bordered">
+			    	<th>chapter</th><th>verse</th><th>text</th>
+				        {%for triplet in value%}
+				        <tr>
+				        	<td>{{triplet[0]}}</td><td>{{triplet[1]}}</td><td>{{triplet[2]}}</td>
+				    	</tr>
+			    		{%endfor%}
+				</table>
+			{%endif%}
+		{%endfor%}
 
 
 
+	</div>
+
+	{%endif%}
 
 
 
